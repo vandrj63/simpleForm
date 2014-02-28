@@ -1,0 +1,139 @@
+<html>
+<head>
+<title>Employee Form</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+
+<script type = "text/javascript">
+<!--
+
+function phone(t) {
+var x = t.value;
+var y = x.split('-');
+
+x = y.join('-');
+if (x.length == 3 || x.length == 7) 
+x += '-';
+t.value = x;
+}
+
+//-->
+ 
+</script>
+</head>
+
+<body>
+<form id = "info" action="employeeForm.php">
+<table>
+<tr>
+	<td colspan="2" align="center"><b>Employee Information</b></td>
+</tr>
+<tr>
+	<td>
+		Employee Name:
+	</td>
+
+	<td>
+		<input type="text" name="employeeName">
+	</td>
+</tr>
+<tr>
+	<td>
+		Employee Number: 
+	</td>
+	<td>
+		<input type="text" name="employeeNumber">
+	</td>
+</tr>
+<tr>
+	<td>
+		Phone Number: 
+	</td>
+	<td>
+		<input type= "text" name ="phoneNumber" maxlength = "12" onkeyup="phone(this)">
+	</td>
+</tr>
+<tr>
+	<td>
+		Address:
+	</td>
+	<td> 
+		<input type= "text" name= "address">
+	</td>
+</tr>
+<tr>
+	<td>
+		City:
+	</td>
+	<td>
+		<input type = "text" name="city">
+	</td>
+</tr>
+<tr>
+	<td>
+		State:
+	</td>
+	<td>
+		<select name ="states">
+		<option value = "Default">Default</option>
+		<option value = "New York">New York</option>
+		<option value = "California">California</option>
+		<option value = "New Jersey">New Jersey</option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>
+		Zip: 
+	</td>
+	<td>
+		<input type= "text" name = "zip" maxlength = "5">
+	</td>
+</tr>
+<tr>
+	<td>
+		Current Employee: 
+	</td>
+	<td>
+		<input type ="checkbox" name= "currentEmployee" value "Yes"> I am currently an employee
+		<br>
+		<input type="checkbox" name = "currentEmployee" value="No"> I am not currently an employee
+	</td>
+</tr>
+<tr>
+	<td>
+		<input type="submit" name="submit" value="Save" />
+	</td>
+	<td>
+		<input type="reset" name="reset" value="clear">
+	</td>
+</tr>
+
+
+</table>
+<div class="form_result">&nbsp;</div>
+</form>
+
+<script type='text/javascript'>
+    /* attach a submit handler to the form */
+    $("#info").submit(function(event) {
+
+      /* stop form from submitting normally */
+      event.preventDefault();
+
+      /* get some values from elements on the page: */
+      var $form = $( this ),
+          url = $form.attr( 'action' );
+
+      /* Send the data using post */
+      var posting = $.post( url, { employeeName: $('#employeeName').val(), employeeNumber: $('#employeeNumber').val(), phoneNumber: $('#phoneNumber').val(), address: $('#address').val(), city: $('#city').val(), state: $('#states').val(), zip: $('#zip').val(), currentEmployee: $('#currentEmployee').val(),} );
+
+      /* Put the results in a div */
+      posting.done(function( data ) {
+        alert('successfully saved all information');
+      });
+    });
+</script>
+
+</body>
+</html>
